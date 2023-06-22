@@ -16,9 +16,13 @@ Lo mismo de siempre en la reformas con DDS, un microcontrolador (Arduino NANO), 
 En esta imagen, se resumen todo el diagrama de bloques del PLL del McKinley, el esquema es genérico para varios chasis producidos por la UNIDEN.
 Puede parecer algo complicado para algunos, pero lo importante es entender un concepto simple. En el caso de la recepción la señal entrante debe mezclarse con una señal generada por el VCO, su diferencia deberá ser siempre 10.695 MHz. Por lo tanto si se quisiera operar una señal en 30 Mhz ¿Que señal debería proveer el VCO? La respuesta es sencilla la diferencia entre los 30.000 y los 10.695, ósea 19305 MHz ¿y si quisiera operar una señal de 24MHz? De nuevo la misma operación 24.000-10.695 que es igual a 13.305 MHz.
 Resumiendo si el VCO estaría preparado para generar una señal entre 13.305 y 19.305 el equipo sería capaz de recibir de 24 a 30 MHZ, bueno “hasta aquí la teoría es sencilla pero..." lograr que el VCO/PLL de estos equipos logre un ancho de 6MHz no es nada sencillo, pero no desesperar, a lo lejos está llegando el “héroe de la película” el CAPITAN DDS.
-
+<p align="center">
+<img src="mc2.png" width="700">
+</p>
 La reforma consiste en aislar la salida del VCO y del PLL antes del amplificador BUFFER y alimentar este mismo con la señal generada por el DDS. En el caso del McKinley y sus primos hermanos, es necesario conservar en funcionamiento del IC de PLL MB8719, porque genera la señal de 10.240Mhz necesaria para el 2° Mixer de RX, por este motivo no se recomienda retirar todo el lazo de PLL, al menos que se genere un nuevo oscilador, pero sería complicar la reforma en vano.
-
+<p align="center">
+<img src="mc3.png" width="700">
+</p>
 En la imagen anterior se puede observar que para la inyección de la señal generada por el DDS se requiere localizar el VCO BUFFER el cual se compone del Transistor TR23 y la bobina variable L18 (Tipo TOKO) retirar el capacitar C95, la resistencia R126, puentear el capacitar C97 y finalmente retirar el transistor TR23, sobre el colector a través de un capacitar cerámico de 4.7 nF se inyecta la señal del DDS, si la conexión es larga se recomienda la utilización de un cable coaxial del tipo RG174 o similar, si la conexión es corta (no más de 3 cm) podría hacerse con cables unipolares.
 Clarificador, debido a que el circuito original utiliza el clarificador para desplazar el oscilador en recepción, este debe desconectarse y revincular a una entrada analógica del microcontrolador. Se puede utilizar el mismo potenciómetro y la misma ubicación. Según la programación este potenciómetro podrá funcionar como RIT/Clarificador/DeltaTune
 Display OLED y Rotary Switch, los mismos pueden instalarse en el lugar de la selectora original.
@@ -30,4 +34,6 @@ Fórmulas para generar las frecuencia correcta:
 AM	Foperacion = Fdds - 10695000 [Hz]
 LSB	Foperacion = Fdds - 10695000 - 1500 [Hz]
 USB	Foperacion = Fdds - 10695000 + 1500 [Hz]
-
+<p align="center">
+<img src="mc4.png" width="300">
+</p>
