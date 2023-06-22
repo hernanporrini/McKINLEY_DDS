@@ -35,5 +35,5 @@ AM	Foperacion = Fdds - 10695000 [Hz]
 LSB	Foperacion = Fdds - 10695000 - 1500 [Hz]
 USB	Foperacion = Fdds - 10695000 + 1500 [Hz]
 <p align="center">
-<img src="mc4.png" width="300">
+<img src="mc4.png" width="700">
 </p>
